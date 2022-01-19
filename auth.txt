@@ -1,0 +1,95 @@
+For this project we have to install:
+ => ejs express mongoose csurf express-session express-promise-router joi morgan jsonwebtoken passport passport-jwt passport-local
+
+ csurf: Node.js CSRF protection middleware. Requires either a session middleware or cookie-parser to be initialized first.
+  - If you are setting the "cookie" option to a non-false value, then you must use cookie-parser before this module.
+  - Otherwise, you must use a session middleware before this module.For Example:
+   => express-session
+   => cookie-session
+We use morgan to see what request is being made.
+The JSON web Token consists of a header, a payload and a signature.
+
+Encoding and encrypting are two different things. With Encoding we can verify that a token is created by us and is not manipulated by a third party.
+const token = JWT.sign({
+iss: 'CornelPrime', // issuer i.e the person giving the token
+sub: newUser._id, // the subject of the token. It connects the token to the user.
+iat: new Date().getTime(), // issued at i.e the time that the token was signed and it is set to current time
+exp: new Date().setDate(new Date().getDate() + 1), // expiration time and it is set to current time + 1 day
+}, 'cornelprimeAuthentication')
+
+Now, to use passport-jwt
+
+Introduction to OAuth => API Based Approach
+-------------------------------------------
+When a user clicks a button that says "sign in using Google", React component will get triggered. Half of the OAuth follow is going to be handled on the frontend and the other half is going to be handled on the backend. The React component then get access Token from Google services. The access token is like a special id for your account that is currently hosted at Google services. That is the identifying information that we want to get our hands on.
+The client communicates with Google and receives accessToken that is associated with this particular Google account. The accessToken is then attached to the body of the request and sent to the backend. The server receives accessToken from the client. Then the server calls Google and exchanges accessToken for user profile. Server checks whether the user with Google's ID exists in our DB.
+If we do not have the Google's ID, the server creates a new user using google's profile and store google's id in it. Use this newly created user to sign a token. Send token back to the client.
+If the Google's ID exist, Load that user from our DB. Use existing user to sign a token.  Send token back to the client.
+At the end of both cases, we send the token back to the client.
+
+Go to:
+ =>console.developers.google.com
+
+To run the frontend and backend server at the same time using one command, we use a package called concurrently.
+ => npm i concurrently
+Then we write the command like this:
+ => "server-dev": "nodemon server/index.js",
+ => "client-dev": "npm start --prefix client",
+ => "start-dev": "concurrently \"npm run server-day\" \"npm run client-dev\""
+
+ The last script command would run the first two command using the concurrently package.
+ The prefix in the second command indicates the folder where the package.json file should be called to run the script command.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
